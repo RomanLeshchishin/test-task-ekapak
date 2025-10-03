@@ -1,4 +1,4 @@
-export type ProductFromServer = {
+export type SmallProductServer = {
   uuid: string;
   name: string;
   description: string;

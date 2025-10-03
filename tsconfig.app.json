@@ -28,7 +28,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@interfaces/*": ["src/interfaces/*"],
-      "@adapters/*": ["src/adapters/*"]
+      "@adapters/*": ["src/adapters/*"],
+      "@components/*": ["src/components/*"]
     }
   },
   "include": ["src"]
