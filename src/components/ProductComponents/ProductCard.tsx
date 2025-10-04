@@ -2,13 +2,27 @@ import React from 'react';
 import { Heart } from 'lucide-react';
 import type { IProduct } from '@/interfaces/IProduct';
 import baseImageProduct from '@/assets/base-product-image.svg';
+import { useAppDispatch } from '@/store/hooks';
+import { addItem } from '@/store/cartSlice';
+import type { ICartItem } from '@/interfaces/ICart';
 
 interface ProductCardProps {
   product: IProduct;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCardProps) => {
+  const dispatch = useAppDispatch();
   const minPrice = product.offers.length > 0 ? product.offers[0].price : 0;
+
+  const handleClick = (product: IProduct) => {
+    dispatch(
+      addItem({
+        ...product,
+        image: product.images.length > 0 ? product.images[0].cardUrl : '',
+        quantity: product.minPurchase,
+      } as ICartItem),
+    );
+  };
 
   return (
     <div className='flex w-64 flex-col rounded-2xl bg-white p-3 shadow'>
@@ -27,7 +41,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
         <span className='text-xs text-gray-400'>Арт. {product.article}</span>
         <h3 className='mt-1 line-clamp-2 text-sm leading-tight font-medium'>{product.name}</h3>
         <div className='mt-2 flex items-center gap-2'>
-          <span className='text-lg font-semibold'>{minPrice} ₽</span>
+          <span className='text-lg font-semibold'>{minPrice} ₽ / шт.</span>
           <span className='ml-auto cursor-pointer text-xs text-sky-500'>
             {product.isExist ? 'В наличии' : 'Под заказ'}
           </span>
@@ -44,7 +58,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
           </div>
         </div>
 
-        <button className='mt-3 rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'>
+        <button
+          className='mt-3 rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'
+          onClick={() => handleClick(product)}
+        >
           Добавить в корзину
         </button>
       </div>
