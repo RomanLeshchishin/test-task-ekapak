@@ -1,3 +1,11 @@
+export type MetaServer = {
+  total: number;
+  current_page: number;
+  last_page: number;
+  per_page: number;
+  cached_at: string;
+};
+
 export type ImageServer = {
   original_url: string;
   card_url: string;
@@ -25,4 +33,9 @@ export type ProductServer = {
   in_cart: boolean;
   images: ImageServer[];
   properties: Record<string, string>;
+};
+
+export type ApiProductsResponse = {
+  data: ProductServer[];
+  meta: MetaServer;
 };

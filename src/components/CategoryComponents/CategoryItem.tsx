@@ -1,35 +1,49 @@
-import { useState } from 'react';
-import { ChevronRight, ChevronDown } from 'lucide-react';
 import type { ICategory } from '@/interfaces/ICategory';
+import blackArrow from '../../assets/black-arrow.svg';
+import blueArrow from '../../assets/blue-arrow.svg';
 
-interface CategoryItemProps {
-  category: ICategory;
+interface CategoryPanelProps {
+  level: number;
+  items: ICategory[];
+  onHover: (category: ICategory, level: number) => void;
+  activePath: ICategory[];
 }
 
-export const CategoryItem: React.FC<CategoryItemProps> = ({ category }: CategoryItemProps) => {
-  const [open, setOpen] = useState(false);
-
-  const hasChildren = category.children.length > 0;
+export const CategoryItem: React.FC<CategoryPanelProps> = ({
+  level,
+  items,
+  onHover,
+  activePath,
+}: CategoryPanelProps) => {
+  const isRoot = level === 0;
 
   return (
-    <div className='ml-2'>
-      <div
-        className='flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 hover:bg-gray-100'
-        onClick={() => hasChildren && setOpen(!open)}
-      >
-        <span>{category.name}</span>
-        {hasChildren && (
-          <span className='text-gray-500'>{open ? <ChevronDown size={16} /> : <ChevronRight size={16} />}</span>
-        )}
-      </div>
+    <div
+      className='absolute top-0 z-10 w-90 rounded-lg border border-gray-100 bg-white px-5 py-6 shadow-lg'
+      style={{ left: `${level * 22.5}rem` }}
+    >
+      {isRoot && <h2 className='mb-3 text-2xl font-semibold text-gray-800'>Каталог товаров</h2>}
 
-      {hasChildren && open && (
-        <div className='ml-4 border-l border-gray-200 pl-2'>
-          {category.children.map(child => (
-            <CategoryItem key={child.id} category={child} />
-          ))}
-        </div>
-      )}
+      <ul className='space-y-1'>
+        {items.map(item => {
+          const isActive = activePath[level]?.id === item.id;
+
+          return (
+            <li
+              key={item.id}
+              onMouseEnter={() => onHover(item, level)}
+              className={`flex cursor-pointer items-center justify-between rounded-md py-2 text-base transition-colors ${isActive ? 'font-medium text-sky-400' : 'text-gray-700'} `}
+            >
+              <span>{item.name}</span>
+              {item.children?.length > 0 && (
+                <span className='text-gray-400'>
+                  <img src={isActive ? blueArrow : blackArrow} alt={'arrow'}></img>
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };

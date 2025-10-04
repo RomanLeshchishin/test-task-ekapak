@@ -47,8 +47,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
           </span>
         </div>
 
-        <div className='mt-3 flex items-center justify-center'>
-          <div className='flex h-20 w-48 justify-center rounded-xl border-1 border-gray-300'>
+        <div className='mt-3 flex items-center'>
+          <div className='flex h-20 w-full justify-center rounded-xl border-1 border-gray-300'>
             <button className='px-3 py-1 text-lg'>-</button>
             <div className='flex flex-col justify-center gap-1'>
               <span className='px-3 text-sm'>{product.minPurchase} шт</span>
@@ -59,7 +59,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
         </div>
 
         <button
-          className='mt-3 rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'
+          className='mt-3 cursor-pointer rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'
           onClick={() => handleClick(product)}
         >
           Добавить в корзину

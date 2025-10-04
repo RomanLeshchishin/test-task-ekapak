@@ -1,5 +1,7 @@
 import type { IImage, IOffer, IProduct } from '@/interfaces/IProduct';
-import type { ImageServer, OfferServer, ProductServer } from './types/ProductServer';
+import type { ImageServer, OfferServer, ProductServer, ApiProductsResponse, MetaServer } from './types/ProductServer';
+
+export type ProductData = { data: IProduct[]; meta: MetaServer };
 
 export const adaptImage = (images: ImageServer[]): IImage[] => {
   return images.map(
@@ -43,4 +45,11 @@ export const adaptProduct = (products: ProductServer[]): IProduct[] => {
         properties: { ...product.properties },
       }) as IProduct,
   );
+};
+
+export const adaptProductsData = (productData: ApiProductsResponse): ProductData => {
+  return {
+    data: adaptProduct(productData.data),
+    meta: productData.meta,
+  };
 };
