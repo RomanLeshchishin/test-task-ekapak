@@ -1,6 +1,6 @@
 import type { ICategory } from '@/interfaces/ICategory';
-import blackArrow from '../../assets/black-arrow.svg';
-import blueArrow from '../../assets/blue-arrow.svg';
+import blackArrow from '@assets/black-arrow.svg';
+import blueArrow from '@assets/blue-arrow.svg';
 import { useAppDispatch } from '@/store/hooks';
 import { removePage } from '@/store/slices/paginationSlice';
 import { removeCategory } from '@/store/slices/categorySlice';

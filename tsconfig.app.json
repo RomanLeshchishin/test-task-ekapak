@@ -30,7 +30,9 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@adapters/*": ["src/adapters/*"],
       "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"]
+      "@hooks/*": ["src/hooks/*"],
+      "@services/*": ["src/services/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src"]
