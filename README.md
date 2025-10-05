@@ -22,7 +22,7 @@ npm run dev
 
 ### 1. Страница каталога товаров
 
-* Реализована **страница каталога** - в меню можно выбрать категорию и подкатегорию, если в ней есть товары, то они подгрузятся на страницу. В верхнем блоке отображается выбранная категория или все товары.
+Реализована **страница каталога** - в меню можно выбрать категорию и подкатегорию, если в ней есть товары, то они подгрузятся на страницу. В верхнем блоке отображается выбранная категория или все товары.
 
   сетка **категорий и подкатегорий**;
   ><img width="742" height="673" alt="image" src="https://github.com/user-attachments/assets/4097bd83-d676-4693-bccc-e91d9ef60050" />
@@ -30,7 +30,7 @@ npm run dev
   сетка **карточек товаров**;
   ><img width="729" height="665" alt="image" src="https://github.com/user-attachments/assets/fab23afe-e059-4336-816b-344e362b0233" />
 
-* Подгрузка данных происходит с помощью хука useQuery и кастомных хуков useAllProducts и useProductsByCategory. Также реализована пагинация для всех товаров и по категориям.
+Подгрузка данных происходит с помощью хука useQuery и кастомных хуков useAllProducts и useProductsByCategory. Также реализована пагинация для всех товаров и по категориям.
 #### `useAllProducts.ts`
 ```ts
 export const useAllProducts = (page: number) => {
@@ -76,7 +76,7 @@ export const useProductsByCategory = (categoryId: string, page: number) => {
 
 ### 3. Типизация
 Данные подгружаемые с сервера типизированы с помощью типов CategoryServer, ProductServer и SmProductServer. Далее через функции-адаптеры они преобразуются в интерфейсы IProduct, ISmProduct, ICategory.
-* Основные интерфейсы расположены в `/src/interfaces/`:
+Основные интерфейсы расположены в `/src/interfaces/`:
 #### `IProduct.ts`
 
 ```ts
