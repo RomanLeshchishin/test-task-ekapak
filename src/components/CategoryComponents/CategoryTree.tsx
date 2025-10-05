@@ -5,8 +5,8 @@ import type { ICategory } from '@/interfaces/ICategory';
 import { createCategoryLevels } from '@/utils/categoryLevels';
 import { CategoryItem } from './CategoryItem';
 import { useAppDispatch } from '@/store/hooks';
-import { addCategory } from '@/store/categorySlice';
-import { removePage } from '@/store/paginationSlice';
+import { addCategory } from '@/store/slices/categorySlice';
+import { removePage } from '@/store/slices/paginationSlice';
 
 export const CategoryTree: React.FC = () => {
   const dispatch = useAppDispatch();

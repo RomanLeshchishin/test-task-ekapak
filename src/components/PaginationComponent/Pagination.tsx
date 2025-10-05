@@ -2,7 +2,7 @@ import React from 'react';
 import type { MetaServer } from '@adapters/types/ProductServer';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useAppDispatch } from '@/store/hooks';
-import { addPage } from '@/store/paginationSlice';
+import { addPage } from '@/store/slices/paginationSlice';
 
 interface PaginationProps {
   meta: MetaServer;

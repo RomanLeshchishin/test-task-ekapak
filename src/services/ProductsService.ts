@@ -1,6 +1,5 @@
 import { api } from '@/axios';
 import { adaptProductsData, type ProductData } from '@/adapters/product-to-client';
-import { mockProducts } from '@/const';
 import type { ApiProductsResponse } from '@adapters/types/ProductServer';
 
 export const getAllProducts = async (page: number): Promise<ProductData> => {

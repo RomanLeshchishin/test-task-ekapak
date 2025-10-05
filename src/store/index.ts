@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from './cartSlice';
-import categoryReducer from './categorySlice';
-import paginationReducer from './paginationSlice';
+import cartReducer from './slices/cartSlice';
+import categoryReducer from './slices/categorySlice';
+import paginationReducer from './slices/paginationSlice';
 
 export const store = configureStore({
   reducer: { cartReducer, categoryReducer, paginationReducer },

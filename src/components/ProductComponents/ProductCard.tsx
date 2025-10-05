@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
 import type { IProduct } from '@/interfaces/IProduct';
 import baseImageProduct from '@/assets/base-product-image.svg';
-import questionIcon from '@/assets/question.svg';
-import { useAppDispatch } from '@/store/hooks';
-import { addItem } from '@/store/cartSlice';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { addItem, removeItem } from '@/store/slices/cartSlice';
 import type { ICartItem } from '@/interfaces/ICart';
 
 interface ProductCardProps {
@@ -14,15 +13,22 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCardProps) => {
   const dispatch = useAppDispatch();
   const minPrice = product.offers.length > 0 ? product.offers[0].price : 0;
+  const [prQuantity, setPrQuantity] = useState<number>(product.minPurchase);
+  const { cartItems } = useAppSelector(state => state.cartReducer);
+  const inCart = cartItems.some(item => item.id === product.id);
 
-  const handleClick = (product: IProduct) => {
+  const handleClickAdd = (product: IProduct) => {
     dispatch(
       addItem({
         ...product,
         image: product.images.length > 0 ? product.images[0].cardUrl : '',
-        quantity: product.minPurchase,
+        quantity: prQuantity,
       } as ICartItem),
     );
+  };
+
+  const handleClickRemove = (productId: string) => {
+    dispatch(removeItem(productId));
   };
 
   return (
@@ -50,25 +56,41 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
           </span>
         </div>
 
-        <div className='mt-3 flex items-center'>
-          <div className='flex h-20 w-full justify-center rounded-xl border-1 border-gray-300'>
-            <button className='px-3 py-1 text-lg'>-</button>
+        <div className='my-auto mt-3 flex items-center'>
+          <div className='flex h-15 w-full items-center justify-center rounded-xl border-1 border-gray-300'>
+            <button
+              className='h-8 w-8 cursor-pointer rounded-md bg-gray-100 text-lg hover:bg-gray-200'
+              onClick={() => setPrQuantity(prQuantity > product.minPurchase ? prQuantity - 1 : prQuantity)}
+            >
+              -
+            </button>
             <div className='flex flex-col justify-center gap-1'>
-              <span className='px-3 text-sm'>{product.minPurchase} шт</span>
-              <span className='px-3 text-xs text-gray-400'>
-                на {Math.floor(minPrice * product.minPurchase * 100) / 100} ₽
-              </span>
+              <span className='px-3 text-center text-sm'>{prQuantity} шт</span>
+              <span className='px-3 text-xs text-gray-400'>на {Math.floor(minPrice * prQuantity * 100) / 100} ₽</span>
             </div>
-            <button className='px-3 py-1 text-lg'>+</button>
+            <button
+              className='h-8 w-8 cursor-pointer rounded-md bg-gray-100 text-lg hover:bg-gray-200'
+              onClick={() => setPrQuantity(prQuantity + 1)}
+            >
+              +
+            </button>
           </div>
         </div>
-
-        <button
-          className='mt-3 cursor-pointer rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'
-          onClick={() => handleClick(product)}
-        >
-          Добавить в корзину
-        </button>
+        {inCart ? (
+          <button
+            className='mt-3 cursor-pointer rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'
+            onClick={() => handleClickRemove(product.id)}
+          >
+            Удалить из корзины
+          </button>
+        ) : (
+          <button
+            className='mt-3 cursor-pointer rounded-xl bg-sky-500 py-2 text-sm font-medium text-white hover:bg-sky-600'
+            onClick={() => handleClickAdd(product)}
+          >
+            Добавить в корзину
+          </button>
+        )}
       </div>
     </div>
   );

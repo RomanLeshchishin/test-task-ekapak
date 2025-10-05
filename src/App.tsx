@@ -15,19 +15,17 @@ function App() {
 
   return (
     <>
-      <div className='w-full bg-gray-50 px-50 py-5'>
+      <div className='flex w-full justify-center bg-gray-50 py-5'>
         <div className='flex flex-col gap-4'>
           <div className='relative flex h-20 w-full justify-between rounded-2xl bg-white px-5'>
             <div className='my-auto flex text-lg'>{category.id !== '' ? category.name : 'Все товары'}</div>
             <Cart />
           </div>
           <div className='flex flex-row gap-4'>
-            <div className='w-90 shrink-0'>
+            <div className='hidden xl:flex xl:w-60 2xl:w-90'>
               <CategoryTree />
             </div>
-            <div className='min-h-screen'>
-              <ProductListWrapper categoryId={category.id} page={page} />
-            </div>
+            <ProductListWrapper categoryId={category.id} page={page} />
           </div>
         </div>
       </div>

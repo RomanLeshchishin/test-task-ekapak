@@ -1,4 +1,4 @@
-import { getCategory, saveCategory } from './localStorage';
+import { getCategory, saveCategory } from '../localStorage';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { ICategoryItem } from '@/interfaces/ICategory';
 

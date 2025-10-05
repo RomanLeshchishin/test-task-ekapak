@@ -1,4 +1,4 @@
-import { getPage, savePage } from './localStorage';
+import { getPage, savePage } from '../localStorage';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 type PaginationState = {

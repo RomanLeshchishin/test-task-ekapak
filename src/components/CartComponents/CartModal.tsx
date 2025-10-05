@@ -13,10 +13,12 @@ interface CartModalProps {
 
 const CartModal: React.FC<CartModalProps> = ({ isOpen, items, onClose, onIncrease, onDecrease, onRemove }) => {
   if (!isOpen) return null;
-
+  const totalAmount = items.reduce((total, item) => {
+    return (total += item.minPrice * item.quantity);
+  }, 0);
   return (
-    <div className='absolute inset-0 top-42 left-285 z-10 flex items-center'>
-      <div className='relative w-96 rounded-xl border border-gray-200 bg-white p-5 shadow-lg'>
+    <div className='absolute inset-0 top-16 z-10 flex items-start sm:left-50 md:left-100 lg:left-160 xl:left-220 2xl:left-250'>
+      <div className='relative rounded-xl border border-gray-200 bg-white p-5 shadow-lg lg:w-120 xl:w-130 2xl:w-140'>
         <button className='absolute top-2 right-3 cursor-pointer text-gray-500 hover:text-black' onClick={onClose}>
           ✕
         </button>
@@ -34,6 +36,7 @@ const CartModal: React.FC<CartModalProps> = ({ isOpen, items, onClose, onIncreas
                 onRemove={onRemove}
               />
             ))}
+            <div className='text-right text-base font-bold'>Итог: {totalAmount} ₽</div>
           </div>
         )}
       </div>

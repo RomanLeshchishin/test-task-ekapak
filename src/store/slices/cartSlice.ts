@@ -1,5 +1,5 @@
 import type { ICartItem } from '@/interfaces/ICart';
-import { getCart, saveCart } from './localStorage';
+import { getCart, saveCart } from '../localStorage';
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 type CartState = {

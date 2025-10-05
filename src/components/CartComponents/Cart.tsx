@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CartModal from './CartModal';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
-import { decreaseQuantity, increaseQuantity, removeItem } from '@/store/cartSlice';
+import { decreaseQuantity, increaseQuantity, removeItem } from '@/store/slices/cartSlice';
 import bag from '@/assets/bag.svg';
 
 export const Cart: React.FC = () => {
@@ -23,7 +23,7 @@ export const Cart: React.FC = () => {
 
   return (
     <div className='flex align-middle'>
-      <button className='cursor-pointer rounded-lg py-2' onClick={() => setIsCartOpen(true)}>
+      <button className='cursor-pointer rounded-lg py-2' onClick={() => setIsCartOpen(prev => !prev)}>
         <img src={bag} alt='bag'></img>
       </button>
 

@@ -1,7 +1,7 @@
 import { ProductList } from '@components/ProductComponents/ProductList';
-import { useAllProducts } from '../../hooks/useAllProducts';
-import { useProductsByCategory } from '../../hooks/useProductsByCategory';
-import { Pagination } from '../PaginationComponent/Pagination';
+import { useAllProducts } from '@hooks/useAllProducts';
+import { useProductsByCategory } from '@hooks/useProductsByCategory';
+import { Pagination } from '@components/PaginationComponent/Pagination';
 
 export function ProductListWrapper({ categoryId, page }: { categoryId: string; page: number }) {
   if (categoryId) {

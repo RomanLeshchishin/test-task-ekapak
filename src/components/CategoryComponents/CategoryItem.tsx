@@ -2,8 +2,8 @@ import type { ICategory } from '@/interfaces/ICategory';
 import blackArrow from '../../assets/black-arrow.svg';
 import blueArrow from '../../assets/blue-arrow.svg';
 import { useAppDispatch } from '@/store/hooks';
-import { removePage } from '@/store/paginationSlice';
-import { removeCategory } from '@/store/categorySlice';
+import { removePage } from '@/store/slices/paginationSlice';
+import { removeCategory } from '@/store/slices/categorySlice';
 
 interface CategoryPanelProps {
   level: number;
@@ -30,7 +30,7 @@ export const CategoryItem: React.FC<CategoryPanelProps> = ({
 
   return (
     <div
-      className='absolute top-0 z-10 w-90 rounded-lg border border-gray-100 bg-white px-5 py-6 shadow-lg'
+      className='absolute top-0 z-10 rounded-lg border border-gray-100 bg-white px-5 py-6 shadow-lg xl:w-60 2xl:w-90'
       style={{ left: `${level * 22.5}rem` }}
     >
       {isRoot && (
@@ -48,7 +48,7 @@ export const CategoryItem: React.FC<CategoryPanelProps> = ({
               key={item.id}
               onMouseEnter={() => onHover(item, level)}
               onClick={() => onClick(item)}
-              className={`flex cursor-pointer items-center justify-between rounded-md py-2 text-base transition-colors ${isActive ? 'font-medium text-sky-400' : 'text-gray-700'} `}
+              className={`flex cursor-pointer items-center justify-between rounded-md py-2 text-base transition-colors xl:w-50 2xl:w-80 ${isActive ? 'font-medium text-sky-400' : 'text-gray-700'} `}
             >
               <span>{item.name}</span>
               {item.children?.length > 0 && (
