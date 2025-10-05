@@ -2,6 +2,7 @@ import React from 'react';
 import { Heart } from 'lucide-react';
 import type { IProduct } from '@/interfaces/IProduct';
 import baseImageProduct from '@/assets/base-product-image.svg';
+import questionIcon from '@/assets/question.svg';
 import { useAppDispatch } from '@/store/hooks';
 import { addItem } from '@/store/cartSlice';
 import type { ICartItem } from '@/interfaces/ICart';
@@ -39,11 +40,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
 
       <div className='mt-3 flex flex-1 flex-col'>
         <span className='text-xs text-gray-400'>Арт. {product.article}</span>
-        <h3 className='mt-1 line-clamp-2 text-sm leading-tight font-medium'>{product.name}</h3>
+        <h3 className='mt-1 line-clamp-2 text-base leading-tight font-medium'>{product.name}</h3>
         <div className='mt-2 flex items-center gap-2'>
-          <span className='text-lg font-semibold'>{minPrice} ₽ / шт.</span>
-          <span className='ml-auto cursor-pointer text-xs text-sky-500'>
-            {product.isExist ? 'В наличии' : 'Под заказ'}
+          <div className='flex flex-row'>
+            <div className='text-base font-semibold'>{minPrice} ₽ / шт.</div>
+          </div>
+          <span className={`ml-auto cursor-pointer text-base ${product.isExist ? 'text-green-400' : 'text-sky-500'}`}>
+            {product.isExist ? <div>В наличии</div> : <div>Под заказ</div>}
           </span>
         </div>
 
@@ -52,7 +55,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }: ProductCard
             <button className='px-3 py-1 text-lg'>-</button>
             <div className='flex flex-col justify-center gap-1'>
               <span className='px-3 text-sm'>{product.minPurchase} шт</span>
-              <span className='px-3 text-xs text-gray-400'>на {minPrice * product.minPurchase} ₽</span>
+              <span className='px-3 text-xs text-gray-400'>
+                на {Math.floor(minPrice * product.minPurchase * 100) / 100} ₽
+              </span>
             </div>
             <button className='px-3 py-1 text-lg'>+</button>
           </div>

@@ -1,19 +1,17 @@
 import type { ISmallProduct } from './ISmProduct';
 
-export interface IBaseCategory {
+export interface ICategory {
   id: string;
   name: string;
   slug: string;
   description: string;
   imageUrl: string;
   minPrice: string;
-}
-
-export interface ISubCategory extends IBaseCategory {
-  children: ISubCategory[];
   products: ISmallProduct[];
+  children: ICategory[];
 }
 
-export interface ICategory extends IBaseCategory {
-  children: ISubCategory[];
+export interface ICategoryItem {
+  id: string;
+  name: string;
 }
