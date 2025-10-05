@@ -14,7 +14,7 @@ interface CartModalProps {
 const CartModal: React.FC<CartModalProps> = ({ isOpen, items, onClose, onIncrease, onDecrease, onRemove }) => {
   if (!isOpen) return null;
   const totalAmount = items.reduce((total, item) => {
-    return (total += item.minPrice * item.quantity);
+    return Math.floor((total += item.minPrice * item.quantity) * 100) / 100;
   }, 0);
   return (
     <div className='absolute inset-0 top-16 z-10 flex items-start sm:left-50 md:left-100 lg:left-160 xl:left-220 2xl:left-250'>
