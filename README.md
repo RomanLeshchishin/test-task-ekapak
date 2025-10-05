@@ -1,4 +1,4 @@
-# 🛍️ Products Catalog — Test Task
+# 🛍️ Тестовое задание на позицию Frontend-разработчика в компанию ЕКАПАК
 
 ## 🚀 Как запустить проект
 
@@ -145,5 +145,6 @@ export interface ICategory {
 ><img width="798" height="736" alt="image" src="https://github.com/user-attachments/assets/c00388b1-366a-4276-8459-7f33ecd77795" />
 
 ---
+## Ссылка на сайт - https://test-task-ekapak.vercel.app
 
 
